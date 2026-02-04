@@ -130,7 +130,7 @@ async function generatePDF(transactions) {
                 head: [['Category', 'Amount', '% of Total']],
                 body: incomeByCategory.map(item => [
                     item.category,
-                    \ OMR \ + item.amount.toFixed(3),
+                    'OMR ' + item.amount.toFixed(3),
                     `${item.percentage.toFixed(1)}%`
                 ]),
                 theme: 'grid',
@@ -153,7 +153,7 @@ async function generatePDF(transactions) {
                 head: [['Category', 'Amount', '% of Total']],
                 body: expenseByCategory.map(item => [
                     item.category,
-                    \ OMR \ + item.amount.toFixed(3),
+                    'OMR ' + item.amount.toFixed(3),
                     `${item.percentage.toFixed(1)}%`
                 ]),
                 theme: 'grid',
@@ -185,7 +185,7 @@ async function generatePDF(transactions) {
                     dateStr,
                     t.type.charAt(0).toUpperCase() + t.type.slice(1),
                     t.category,
-                    `${sign}${\ OMR \ + t.amount.toFixed(3)}`,
+                    `${sign}OMR ${t.amount.toFixed(3)}`,
                     t.note || '-'
                 ];
             });
