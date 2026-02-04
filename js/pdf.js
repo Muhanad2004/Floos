@@ -97,9 +97,9 @@ async function generatePDF(transactions) {
 
         doc.setFontSize(10);
         doc.setFont(undefined, 'normal');
-        doc.text(`Total Income: ${formatOMR(totalIncome)}`, margin, yPos);
+        doc.text(`Total Income: OMR ${totalIncome.toFixed(3)}`, margin, yPos);
         yPos += 6;
-        doc.text(`Total Expenses: ${formatOMR(totalExpenses)}`, margin, yPos);
+        doc.text(`Total Expenses: OMR ${totalExpenses.toFixed(3)}`, margin, yPos);
         yPos += 6;
 
         doc.setFont(undefined, 'bold');
@@ -108,7 +108,7 @@ async function generatePDF(transactions) {
         } else {
             doc.setTextColor(239, 68, 68);
         }
-        doc.text(`Net Balance: ${formatOMR(balance)}`, margin, yPos);
+        doc.text(`Net Balance: OMR ${balance.toFixed(3)}`, margin, yPos);
         doc.setTextColor(0, 0, 0);
         yPos += 15;
 
@@ -130,7 +130,7 @@ async function generatePDF(transactions) {
                 head: [['Category', 'Amount', '% of Total']],
                 body: incomeByCategory.map(item => [
                     item.category,
-                    formatOMR(item.amount),
+                    \ OMR \ + item.amount.toFixed(3),
                     `${item.percentage.toFixed(1)}%`
                 ]),
                 theme: 'grid',
@@ -153,7 +153,7 @@ async function generatePDF(transactions) {
                 head: [['Category', 'Amount', '% of Total']],
                 body: expenseByCategory.map(item => [
                     item.category,
-                    formatOMR(item.amount),
+                    \ OMR \ + item.amount.toFixed(3),
                     `${item.percentage.toFixed(1)}%`
                 ]),
                 theme: 'grid',
@@ -185,7 +185,7 @@ async function generatePDF(transactions) {
                     dateStr,
                     t.type.charAt(0).toUpperCase() + t.type.slice(1),
                     t.category,
-                    `${sign}${formatOMR(t.amount)}`,
+                    `${sign}${\ OMR \ + t.amount.toFixed(3)}`,
                     t.note || '-'
                 ];
             });
