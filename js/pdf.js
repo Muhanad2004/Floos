@@ -208,9 +208,32 @@ async function generatePDF(transactions) {
             });
         }
 
-        // Save PDF
-        doc.save(filename);
-        showToast('PDF generated successfully', 'success');
+        // Save PDF - Use Web Share API on iOS for native share sheet
+        const pdfBlob = doc.output('blob');
+
+        // Check if Web Share API is available (iOS PWA)
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([pdfBlob], filename, { type: 'application/pdf' })] })) {
+            try {
+                const file = new File([pdfBlob], filename, { type: 'application/pdf' });
+                await navigator.share({
+                    files: [file],
+                    title: 'Floos Expense Report',
+                    text: 'Your expense report from Floos'
+                });
+                showToast('PDF shared successfully', 'success');
+            } catch (error) {
+                // User cancelled share or error occurred
+                if (error.name !== 'AbortError') {
+                    // Fallback to download
+                    doc.save(filename);
+                    showToast('PDF downloaded', 'success');
+                }
+            }
+        } else {
+            // Fallback to traditional download for non-iOS or desktop
+            doc.save(filename);
+            showToast('PDF generated successfully', 'success');
+        }
 
     } catch (error) {
         console.error('Error generating PDF:', error);
