@@ -166,6 +166,8 @@ body {
   background-color: var(--bg-primary);
   transition: background-color var(--transition-base), color var(--transition-base);
   overflow-x: hidden;
+  /* Prevent overscroll bounce on iOS */
+  overscroll-behavior-y: none;
 }
 
 /* iOS Optimizations */
@@ -201,7 +203,9 @@ select {
   position: sticky;
   top: 0;
   height: 64px;
-  background-color: var(--bg-primary);
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border-color);
   z-index: 100;
   transition: background-color var(--transition-base), border-color var(--transition-base);
@@ -209,6 +213,11 @@ select {
   padding-top: max(var(--sat), 8px);
   padding-left: var(--sal);
   padding-right: var(--sar);
+}
+
+/* Dark mode header with blur */
+[data-theme="dark"] .header {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .header-content {
