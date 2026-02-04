@@ -278,11 +278,15 @@ select {
 .summary-card {
   background: var(--bg-secondary);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-color);
+  padding: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
-  transition: all var(--transition-base);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  border: 1px solid var(--border-color);
+}
+
+.summary-card:active {
+  transform: scale(0.98);
 }
 
 .balance-section {
@@ -405,29 +409,31 @@ select {
 .transaction-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
 }
 
+/* === Transaction Cards === */
 .transaction-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md);
   background: var(--bg-secondary);
   border-radius: var(--radius-md);
-  padding: var(--spacing-md);
-  border: 1px solid var(--border-color);
+  margin-bottom: var(--spacing-sm);
   cursor: pointer;
-  transition: all var(--transition-fast);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  transition: all var(--transition-base);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .transaction-card:hover {
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-sm);
-  transform: translateY(-1px);
+  background: var(--bg-tertiary);
+  transform: translateX(4px);
 }
 
 .transaction-card:active {
-  transform: translateY(0);
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .transaction-info {
