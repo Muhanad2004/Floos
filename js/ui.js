@@ -8,7 +8,8 @@ function showModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
         modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        haptic('light');
     }
 }
 
@@ -17,6 +18,9 @@ function hideModal(modalId) {
     if (modal) {
         modal.classList.remove('show');
         document.body.style.overflow = '';
+        setTimeout(() => {
+            resetTransactionForm();
+        }, 300); // Wait for transition
     }
 }
 
@@ -61,6 +65,19 @@ function renderTransactions(transactions) {
     const listContainer = document.getElementById('transaction-list');
     const emptyState = document.getElementById('empty-state');
 
+    // Category emoji icons
+    const categoryIcons = {
+        'Salary': '💰',
+        'Gift': '🎁',
+        'Freelance': '💻',
+        'Groceries': '🛒',
+        'Snacks': '🍿',
+        'Laundromat': '👕',
+        'Barber': '✂️',
+        'Fuel': '⛽',
+        'Other': '📋'
+    };
+
     if (!transactions || transactions.length === 0) {
         listContainer.innerHTML = '';
         emptyState.classList.add('show');
@@ -75,18 +92,18 @@ function renderTransactions(transactions) {
         const amountClass = transaction.type === 'income' ? 'income' : 'expense';
         const amountSign = transaction.type === 'income' ? '+' : '-';
         const formattedAmount = formatOMR(transaction.amount);
+        const icon = categoryIcons[transaction.category] || '📋';
 
         return `
       <div class="transaction-card" data-id="${transaction.id}">
+        <div class="transaction-icon ${amountClass}">${icon}</div>
         <div class="transaction-info">
-          <div class="transaction-header">
-            <span class="transaction-category">${transaction.category}</span>
-          </div>
-          ${transaction.note ? `<p class="transaction-note">${escapeHtml(transaction.note)}</p>` : ''}
-          <p class="transaction-date">${formattedDate}</p>
+          <p class="transaction-category">${transaction.category}</p>
+          <p class="transaction-note">${transaction.note ? escapeHtml(transaction.note) : formattedDate}</p>
         </div>
-        <div class="transaction-amount ${amountClass}">
-          ${amountSign}${formattedAmount}
+        <div class="transaction-amount-wrapper">
+          <p class="transaction-amount ${amountClass}">${amountSign}${formattedAmount}</p>
+          ${transaction.note ? `<p class="transaction-date">${formattedDate}</p>` : ''}
         </div>
       </div>
     `;
@@ -188,59 +205,34 @@ function populateCategoryDropdown(type) {
 }
 
 // Open Edit Modal
-async function openEditModal(transactionId) {
+async function openEditModal(id) {
     try {
-        const transaction = await getTransaction(transactionId);
-        if (!transaction) {
-            showToast('Transaction not found', 'error');
-            return;
-        }
-
-        // Set modal title
-        document.getElementById('modal-title').textContent = 'Edit Transaction';
+        const transaction = await getTransaction(id);
+        if (!transaction) return;
 
         // Populate form
-        document.getElementById('amount-input').value = transaction.amount.toFixed(3);
+        const form = document.getElementById('transaction-form');
+        form.dataset.editId = id;
+        form.querySelector('[name="type"][value="' + transaction.type + '"]').checked = true;
 
-        // Set type
-        if (transaction.type === 'income') {
-            document.getElementById('type-income').checked = true;
-        } else {
-            document.getElementById('type-expense').checked = true;
-        }
-
-        // Update categories and select current
+        // Trigger change event to populate categories
         populateCategoryDropdown(transaction.type);
-        document.getElementById('category-select').value = transaction.category;
 
-        // Set note
-        document.getElementById('note-input').value = transaction.note || '';
-
-        // Show date field and set value
-        const dateGroup = document.getElementById('date-group');
-        const dateInput = document.getElementById('date-input');
-        dateGroup.style.display = 'block';
-
-        // Convert ISO date to datetime-local format
-        const date = new Date(transaction.date);
-        const localDateTime = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-            .toISOString()
-            .slice(0, 16);
-        dateInput.value = localDateTime;
+        form.querySelector('[name="amount"]').value = transaction.amount;
+        form.querySelector('[name="category"]').value = transaction.category;
+        form.querySelector('[name="date"]').value = transaction.date.split('T')[0];
+        form.querySelector('[name="note"]').value = transaction.note || '';
 
         // Show delete button
-        const deleteBtn = document.getElementById('delete-btn');
-        deleteBtn.style.display = 'block';
-        deleteBtn.onclick = () => confirmDeleteTransaction(transaction.id);
+        document.getElementById('delete-btn-wrapper').style.display = 'block';
+        document.getElementById('delete-btn').onclick = () => confirmDeleteTransaction(id);
 
-        // Store transaction ID in form
-        const form = document.getElementById('transaction-form');
-        form.dataset.editId = transaction.id;
-
+        document.getElementById('modal-title').textContent = 'Edit Transaction';
         showModal('transaction-modal');
+        haptic('medium');
     } catch (error) {
         console.error('Error opening edit modal:', error);
-        showToast('Failed to load transaction', 'error');
+        showToast('Error loading transaction', 'error');
     }
 }
 

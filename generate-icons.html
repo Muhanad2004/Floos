@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Floos Icons</title>
+    <style>
+        body {
+            font-family: system-ui;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .preview {
+            margin: 20px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #84CC16;
+            border: none;
+            color: white;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Floos Icon Generator</h1>
+    <p>This tool will render the new SVG logo into a high-quality 512x512 PNG.</p>
+
+    <div id="container"></div>
+    <br>
+    <button onclick="generateAndDownload()">Download Icon</button>
+
+    <script>
+        const svgData = `<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" fill="#84CC16"/>
+  <text 
+    x="512" 
+    y="620" 
+    font-family="-apple-system, SF Pro Display, system-ui, sans-serif" 
+    font-size="520" 
+    font-weight="800"
+    fill="#1A1A1A" 
+    text-anchor="middle"
+    dominant-baseline="middle">f.</text>
+</svg>`;
+
+        function generateAndDownload() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 512;
+            canvas.height = 512;
+            const ctx = canvas.getContext('2d');
+
+            const img = new Image();
+            img.onload = () => {
+                ctx.drawImage(img, 0, 0, 512, 512);
+
+                const link = document.createElement('a');
+                link.download = 'icon-512x512.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            };
+            img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+
+            document.body.appendChild(canvas);
+            canvas.className = 'preview';
+        }
+
+        // Auto-run for preview
+        window.onload = () => {
+            const img = new Image();
+            img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+            img.style.width = '200px';
+            img.style.height = '200px';
+            img.className = 'preview';
+            document.getElementById('container').appendChild(img);
+        };
+    </script>
+</body>
+
+</html>
