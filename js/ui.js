@@ -287,7 +287,7 @@ function confirmDeleteTransaction(transactionId) {
 function confirmClearAllData() {
     const confirmModal = document.getElementById('confirm-modal');
     document.getElementById('confirm-title').textContent = 'Clear All Data';
-    document.getElementById('confirm-message').textContent = 'This will delete ALL transactions permanently. This cannot be undone. Type DELETE to confirm.';
+    document.getElementById('confirm-message').textContent = 'This will delete ALL transactions, cache, and force a fresh download. Type DELETE to confirm.';
 
     const confirmInput = document.getElementById('confirm-input');
     confirmInput.style.display = 'block';
@@ -297,11 +297,36 @@ function confirmClearAllData() {
     confirmBtn.onclick = async () => {
         if (confirmInput.value === 'DELETE') {
             try {
+                // Clear transactions
                 await clearAllTransactions();
+
+                // Clear localStorage
                 localStorage.clear();
+
+                // Clear all caches (service worker caches)
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    await Promise.all(
+                        cacheNames.map(cacheName => caches.delete(cacheName))
+                    );
+                }
+
+                // Unregister service worker
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    await Promise.all(
+                        registrations.map(registration => registration.unregister())
+                    );
+                }
+
                 hideModal('confirm-modal');
-                showToast('All data cleared', 'success');
-                await loadAndRenderTransactions();
+                showToast('All data and cache cleared. Reloading...', 'success');
+
+                // Wait a moment then reload to get fresh version
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 1500);
+
             } catch (error) {
                 console.error('Error clearing data:', error);
                 showToast('Failed to clear data', 'error');
