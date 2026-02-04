@@ -8,14 +8,14 @@ const CACHE_NAME = `floos-cache-${CACHE_VERSION}`;
 
 // Assets to cache
 const STATIC_ASSETS = [
-    '/',
-    '/index.html',
-    '/manifest.json',
-    '/css/styles.css',
-    '/js/app.js',
-    '/js/db.js',
-    '/js/ui.js',
-    '/js/pdf.js'
+    './',
+    './index.html',
+    './manifest.json',
+    './css/styles.css',
+    './js/app.js',
+    './js/db.js',
+    './js/ui.js',
+    './js/pdf.js'
 ];
 
 // Install event - cache static assets
@@ -109,7 +109,7 @@ self.addEventListener('fetch', (event) => {
             .catch(() => {
                 // Offline fallback
                 if (event.request.destination === 'document') {
-                    return caches.match('/index.html');
+                    return caches.match('./index.html');
                 }
             })
     );

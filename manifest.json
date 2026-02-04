@@ -2,15 +2,15 @@
   "name": "Floos - Expense Tracker",
   "short_name": "Floos",
   "description": "Track your income and expenses in Omani Riyals",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#FFFFFF",
   "theme_color": "#84CC16",
   "icons": [
     {
-      "src": "/icons/icon-72x72.png",
+      "src": "./icons/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "any"

@@ -12,20 +12,20 @@
   <meta name="apple-mobile-web-app-title" content="Floos">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#84CC16" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 
   <!-- Apple Touch Icon -->
-  <link rel="apple-touch-icon" href="/icons/icon-180x180.png">
+  <link rel="apple-touch-icon" href="./icons/icon-180x180.png">
 
   <!-- Manifest -->
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="./manifest.json">
 
   <title>Floos - Expense Tracker</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
@@ -321,16 +321,16 @@
   </div>
 
   <!-- Scripts -->
-  <script src="/js/db.js"></script>
-  <script src="/js/ui.js"></script>
-  <script src="/js/app.js"></script>
-  <script src="/js/pdf.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/app.js"></script>
+  <script src="./js/pdf.js"></script>
 
   <!-- Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('./sw.js')
           .then(reg => console.log('Service Worker registered'))
           .catch(err => console.error('Service Worker registration failed:', err));
       });
