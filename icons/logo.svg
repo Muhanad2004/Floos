@@ -1,0 +1,15 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Lime green background - no border radius (iOS adds it automatically) -->
+  <rect width="1024" height="1024" fill="#84CC16"/>
+  
+  <!-- Bold 'f.' optimized for iOS home screen -->
+  <text 
+    x="512" 
+    y="660" 
+    font-family="-apple-system, system-ui, sans-serif" 
+    font-size="560" 
+    font-weight="700"
+    fill="#1A1A1A" 
+    text-anchor="middle"
+    letter-spacing="-12">f.</text>
+</svg>

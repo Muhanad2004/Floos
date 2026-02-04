@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+
+  <!-- iOS PWA Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Floos">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#84CC16" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="/icons/icon-180x180.png">
+
+  <!-- Manifest -->
+  <link rel="manifest" href="/manifest.json">
+
+  <title>Floos - Expense Tracker</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <!-- App Container -->
+  <div id="app" class="app-container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1 class="app-title">Floos</h1>
+        <div class="header-actions">
+          <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+            <svg class="icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+          <button id="settings-btn" class="icon-btn" aria-label="Settings">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path
+                d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24">
+              </path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-view" class="main-content">
+
+      <!-- Dashboard View -->
+      <div id="dashboard-view" class="view active">
+
+        <!-- Summary Card -->
+        <section class="summary-card">
+          <div class="balance-section">
+            <p class="balance-label">Current Balance</p>
+            <h2 id="current-balance" class="balance-amount">ر.ع. 0.000</h2>
+          </div>
+          <div class="stats-row">
+            <div class="stat-item stat-income">
+              <p class="stat-label">Income</p>
+              <p id="total-income" class="stat-value">ر.ع. 0.000</p>
+            </div>
+            <div class="stat-item stat-expense">
+              <p class="stat-label">Expenses</p>
+              <p id="total-expenses" class="stat-value">ر.ع. 0.000</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Time Filter Bar -->
+        <section class="filter-bar">
+          <button class="filter-btn active" data-filter="all">All Time</button>
+          <button class="filter-btn" data-filter="today">Today</button>
+          <button class="filter-btn" data-filter="week">This Week</button>
+          <button class="filter-btn" data-filter="month">This Month</button>
+          <button class="filter-btn" data-filter="custom">Custom</button>
+        </section>
+
+        <!-- Transaction List -->
+        <section class="transaction-list-section">
+          <h3 class="section-title">Transactions</h3>
+          <div id="transaction-list" class="transaction-list">
+            <!-- Transactions will be rendered here -->
+          </div>
+
+          <!-- Empty State -->
+          <div id="empty-state" class="empty-state">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            <p class="empty-title">No transactions yet</p>
+            <p class="empty-description">Start tracking your expenses and income</p>
+            <button id="empty-add-btn" class="btn btn-primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Add Transaction
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Settings View -->
+      <div id="settings-view" class="view">
+        <div class="settings-container">
+          <div class="settings-header">
+            <button id="back-to-dashboard" class="icon-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+            </button>
+            <h2>Settings</h2>
+          </div>
+
+          <!-- Theme Setting -->
+          <section class="settings-section">
+            <h3 class="settings-section-title">Appearance</h3>
+            <div class="setting-item">
+              <div class="setting-info">
+                <p class="setting-label">Theme</p>
+                <p class="setting-description">Choose light or dark mode</p>
+              </div>
+              <div class="theme-toggle-switch">
+                <span class="theme-option">Light</span>
+                <span class="theme-option">Dark</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Data Management -->
+          <section class="settings-section">
+            <h3 class="settings-section-title">Data Management</h3>
+
+            <button id="export-json-btn" class="setting-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Export to JSON
+            </button>
+
+            <button id="import-json-btn" class="setting-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              Import from JSON
+            </button>
+            <input type="file" id="import-file-input" accept=".json" style="display: none;">
+
+            <button id="export-pdf-btn" class="setting-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              Generate PDF Report
+            </button>
+
+            <button id="clear-data-btn" class="setting-btn setting-btn-danger">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+              Clear All Data
+            </button>
+          </section>
+
+          <!-- App Info -->
+          <section class="settings-section">
+            <h3 class="settings-section-title">App Info</h3>
+            <div class="info-item">
+              <span class="info-label">Version</span>
+              <span class="info-value">v1.0.0</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Status</span>
+              <span id="online-status" class="status-badge status-online">
+                <span class="status-dot"></span>
+                Online
+              </span>
+            </div>
+          </section>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Floating Action Button -->
+    <button id="fab" class="fab" aria-label="Add transaction">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    </button>
+
+  </div>
+
+  <!-- Transaction Modal (Add/Edit) -->
+  <div id="transaction-modal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Add Transaction</h2>
+        <button id="close-modal" class="icon-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <form id="transaction-form" class="transaction-form">
+        <!-- Amount Input -->
+        <div class="form-group">
+          <label for="amount-input">Amount (OMR)</label>
+          <div class="input-with-prefix">
+            <span class="input-prefix">ر.ع.</span>
+            <input type="number" id="amount-input" name="amount" placeholder="0.000" step="0.001" min="0.001"
+              max="999999.999" required autofocus>
+          </div>
+        </div>
+
+        <!-- Type Toggle -->
+        <div class="form-group">
+          <label>Type</label>
+          <div class="type-toggle">
+            <input type="radio" id="type-expense" name="type" value="expense" checked>
+            <input type="radio" id="type-income" name="type" value="income">
+            <div class="toggle-slider"></div>
+            <label for="type-expense" class="toggle-option">Expense</label>
+            <label for="type-income" class="toggle-option">Income</label>
+          </div>
+        </div>
+
+        <!-- Category Dropdown -->
+        <div class="form-group">
+          <label for="category-select">Category</label>
+          <select id="category-select" name="category" required>
+            <!-- Options populated by JavaScript -->
+          </select>
+        </div>
+
+        <!-- Note Field -->
+        <div class="form-group">
+          <label for="note-input">Note (Optional)</label>
+          <textarea id="note-input" name="note" placeholder="Add a note..." maxlength="200" rows="3"></textarea>
+        </div>
+
+        <!-- Date/Time Display (for edit mode) -->
+        <div class="form-group" id="date-group" style="display: none;">
+          <label for="date-input">Date & Time</label>
+          <input type="datetime-local" id="date-input" name="date">
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="modal-actions">
+          <button type="button" id="delete-btn" class="btn btn-danger" style="display: none;">Delete</button>
+          <div class="modal-actions-right">
+            <button type="button" id="cancel-btn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" id="save-btn" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirm-modal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content modal-small">
+      <div class="modal-header">
+        <h2 id="confirm-title">Confirm Action</h2>
+      </div>
+      <div class="modal-body">
+        <p id="confirm-message"></p>
+        <input type="text" id="confirm-input" class="input" placeholder="Type DELETE to confirm" style="display: none;">
+      </div>
+      <div class="modal-actions">
+        <button id="confirm-cancel" class="btn btn-secondary">Cancel</button>
+        <button id="confirm-ok" class="btn btn-danger">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <span id="toast-message"></span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/db.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/pdf.js"></script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('Service Worker registered'))
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+  </script>
+</body>
+
+</html>
