@@ -2,15 +2,16 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   gap: 8px;
   padding: 0 16px;
+  height: 100%;
 }
 
 .key {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 64px;
   border-radius: 12px;
   background: var(--color-surface);
   font-size: 1.4rem;

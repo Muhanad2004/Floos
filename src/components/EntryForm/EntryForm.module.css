@@ -2,12 +2,13 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 16px 0;
+  gap: 12px;
+  padding: 12px 0 0;
   height: 100%;
+  overflow: hidden;
 }
 
-.amountWrap { padding: 8px 16px; }
+.amountWrap { padding: 0 16px; }
 .notesWrap { padding: 0 16px; }
 
 .notesInput {
@@ -23,4 +24,8 @@
 
 .notesInput:focus { border-color: var(--color-green); }
 
-.numPadWrap { margin-top: auto; padding-bottom: 16px; }
+.numPadWrap {
+  flex: 1;
+  min-height: 0;
+  padding-bottom: 12px;
+}
