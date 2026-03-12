@@ -6,6 +6,7 @@
   padding: 0 16px;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
 }
 .scroll::-webkit-scrollbar { display: none; }
 

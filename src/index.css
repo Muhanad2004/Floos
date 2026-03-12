@@ -50,10 +50,12 @@ html {
   background: var(--color-bg);
   color: var(--color-text);
   -webkit-text-size-adjust: 100%;
+  -webkit-touch-callout: none;
 }
 
 body {
   overscroll-behavior: none;
+  touch-action: pan-y;
 }
 
 #root {
@@ -72,6 +74,8 @@ button {
   font: inherit;
   color: inherit;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
 }
 
 button:disabled { cursor: default; }
@@ -79,4 +83,5 @@ button:disabled { cursor: default; }
 input {
   font: inherit;
   color: inherit;
+  font-size: 16px;
 }
