@@ -1,0 +1,29 @@
+/* src/components/BottomSheet/BottomSheet.module.css */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-overlay);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  animation: fadeIn 0.15s ease;
+}
+
+.sheet {
+  width: 100%;
+  background: var(--color-sheet-bg);
+  border-radius: 16px 16px 0 0;
+  padding: 8px 0 calc(16px + env(safe-area-inset-bottom)) 0;
+  animation: slideUp 0.25s ease;
+}
+
+.handle {
+  width: 36px;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+  margin: 0 auto 12px;
+}
+
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes slideUp { from { transform: translateY(100%) } to { transform: translateY(0) } }
