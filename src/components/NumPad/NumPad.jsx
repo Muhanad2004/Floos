@@ -32,6 +32,7 @@ export default function NumPad({ onDigit, onBackspace, onConfirm, confirmDisable
               ${isConfirm && confirmDisabled ? styles.disabled : ''}
             `}
             onClick={() => handleKey(isConfirm ? 'CONFIRM' : key)}
+            disabled={isConfirm && confirmDisabled}
           >
             {displayKey}
           </button>

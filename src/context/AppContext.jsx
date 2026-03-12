@@ -9,22 +9,28 @@ export function AppProvider({ children }) {
   const [settings, setSettings] = useState(() => readSettings())
 
   const addTransaction = useCallback((tx) => {
-    const next = [tx, ...transactions]
-    setTransactions(next)
-    writeTransactions(next)
-  }, [transactions])
+    setTransactions(prev => {
+      const next = [tx, ...prev]
+      writeTransactions(next)
+      return next
+    })
+  }, [])
 
   const updateTransaction = useCallback((id, updates) => {
-    const next = transactions.map(tx => tx.id === id ? { ...tx, ...updates } : tx)
-    setTransactions(next)
-    writeTransactions(next)
-  }, [transactions])
+    setTransactions(prev => {
+      const next = prev.map(tx => tx.id === id ? { ...tx, ...updates } : tx)
+      writeTransactions(next)
+      return next
+    })
+  }, [])
 
   const deleteTransaction = useCallback((id) => {
-    const next = transactions.filter(tx => tx.id !== id)
-    setTransactions(next)
-    writeTransactions(next)
-  }, [transactions])
+    setTransactions(prev => {
+      const next = prev.filter(tx => tx.id !== id)
+      writeTransactions(next)
+      return next
+    })
+  }, [])
 
   const updateSettings = useCallback((updates) => {
     const next = { ...settings, ...updates }
@@ -35,7 +41,7 @@ export function AppProvider({ children }) {
   const eraseAllData = useCallback(() => {
     clearAllData()
     setTransactions([])
-    setSettings({ theme: 'system' })
+    setSettings(readSettings())
   }, [])
 
   return (

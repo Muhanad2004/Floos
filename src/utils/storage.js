@@ -11,7 +11,11 @@ export function readTransactions() {
 }
 
 export function writeTransactions(data) {
-  localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify(data))
+  try {
+    localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify(data))
+  } catch {
+    // QuotaExceededError (e.g. iOS Safari private browsing) — state kept in memory
+  }
 }
 
 export function readSettings() {
@@ -23,7 +27,11 @@ export function readSettings() {
 }
 
 export function writeSettings(settings) {
-  localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings))
+  try {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings))
+  } catch {
+    // QuotaExceededError (e.g. iOS Safari private browsing) — state kept in memory
+  }
 }
 
 export function clearAllData() {

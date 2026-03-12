@@ -3,12 +3,12 @@ import { useEffect, useRef } from 'react'
 import styles from './BottomSheet.module.css'
 
 export default function BottomSheet({ isOpen, onClose, children }) {
-  const sheetRef = useRef(null)
+  const handleRef = useRef(null)
   const startYRef = useRef(null)
 
   useEffect(() => {
-    const sheet = sheetRef.current
-    if (!sheet) return
+    const handle = handleRef.current
+    if (!handle) return
     function onTouchStart(e) { startYRef.current = e.touches[0].clientY }
     function onTouchEnd(e) {
       if (startYRef.current === null) return
@@ -16,26 +16,20 @@ export default function BottomSheet({ isOpen, onClose, children }) {
       if (delta > 80) onClose()
       startYRef.current = null
     }
-    sheet.addEventListener('touchstart', onTouchStart)
-    sheet.addEventListener('touchend', onTouchEnd)
+    handle.addEventListener('touchstart', onTouchStart)
+    handle.addEventListener('touchend', onTouchEnd)
     return () => {
-      sheet.removeEventListener('touchstart', onTouchStart)
-      sheet.removeEventListener('touchend', onTouchEnd)
+      handle.removeEventListener('touchstart', onTouchStart)
+      handle.removeEventListener('touchend', onTouchEnd)
     }
   }, [onClose])
-
-  useEffect(() => {
-    if (isOpen) document.body.style.overflow = 'hidden'
-    else document.body.style.overflow = ''
-    return () => { document.body.style.overflow = '' }
-  }, [isOpen])
 
   if (!isOpen) return null
 
   return (
     <div className={styles.overlay} onClick={onClose}>
-      <div ref={sheetRef} className={styles.sheet} onClick={e => e.stopPropagation()}>
-        <div className={styles.handle} />
+      <div className={styles.sheet} onClick={e => e.stopPropagation()}>
+        <div ref={handleRef} className={styles.handle} />
         {children}
       </div>
     </div>

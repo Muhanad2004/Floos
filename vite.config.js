@@ -20,7 +20,8 @@ export default defineConfig({
         orientation: 'portrait',
         start_url: '/Floos/',
         icons: [
-          { src: 'icon.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+          { src: 'icon.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+            { src: 'icon.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }
         ]
       },
       workbox: {

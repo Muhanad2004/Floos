@@ -74,6 +74,8 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+button:disabled { cursor: default; }
+
 input {
   font: inherit;
   color: inherit;
