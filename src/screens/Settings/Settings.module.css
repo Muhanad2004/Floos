@@ -1,0 +1,72 @@
+/* src/screens/Settings/Settings.module.css */
+.screen { display: flex; flex-direction: column; height: 100%; padding: 24px 16px; }
+.title { font-size: 1.5rem; font-weight: 800; margin-bottom: 32px; }
+.section { margin-bottom: 24px; }
+
+.sectionLabel {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.themeToggle {
+  display: flex;
+  background: var(--color-surface);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.themeOption {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: all 0.15s;
+}
+
+.themeOption.active {
+  background: var(--color-bg);
+  color: var(--color-text);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.spacer { flex: 1; }
+
+.eraseBtn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-red);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.confirmSheet { padding: 8px 16px; display: flex; flex-direction: column; gap: 8px; }
+
+.confirmMsg {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  padding: 8px 0 12px;
+  line-height: 1.5;
+}
+
+.sheetBtn {
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.sheetBtn.destructive { color: var(--color-red); font-weight: 600; }
