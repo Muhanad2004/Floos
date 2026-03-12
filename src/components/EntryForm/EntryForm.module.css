@@ -22,3 +22,5 @@
 }
 
 .notesInput:focus { border-color: var(--color-green); }
+
+.numPadWrap { margin-top: auto; padding-bottom: 16px; }

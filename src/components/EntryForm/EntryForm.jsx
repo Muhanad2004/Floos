@@ -53,14 +53,16 @@ export default function EntryForm({ onSubmit, initialValues, isEdit = false }) {
         />
       </div>
       {!notesFocused && (
-        <NumPad
-          mode={mode}
-          confirmDisabled={confirmDisabled}
-          confirmLabel={isEdit ? 'Save' : '✓'}
-          onDigit={d => setQueue(q => addDigit(q, d))}
-          onBackspace={() => setQueue(q => removeDigit(q))}
-          onConfirm={handleConfirm}
-        />
+        <div className={styles.numPadWrap}>
+          <NumPad
+            mode={mode}
+            confirmDisabled={confirmDisabled}
+            confirmLabel={isEdit ? 'Save' : '✓'}
+            onDigit={d => setQueue(q => addDigit(q, d))}
+            onBackspace={() => setQueue(q => removeDigit(q))}
+            onConfirm={handleConfirm}
+          />
+        </div>
       )}
     </div>
   )
