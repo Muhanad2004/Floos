@@ -10,9 +10,17 @@ export default function Settings() {
   const { settings, updateSettings, eraseAllData } = useApp()
   const [showConfirm, setShowConfirm] = useState(false)
 
-  function handleErase() {
+  async function handleErase() {
     eraseAllData()
-    setShowConfirm(false)
+    if ('caches' in window) {
+      const keys = await caches.keys()
+      await Promise.all(keys.map(k => caches.delete(k)))
+    }
+    if ('serviceWorker' in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations()
+      await Promise.all(regs.map(r => r.unregister()))
+    }
+    window.location.reload()
   }
 
   return (
