@@ -14,7 +14,7 @@
   border-radius: 10px;
   border: 1.5px solid var(--color-border);
   background: var(--color-surface);
-  font-size: 0.95rem;
+  font-size: 16px;
   outline: none;
 }
 
