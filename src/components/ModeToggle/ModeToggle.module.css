@@ -10,9 +10,9 @@
 }
 
 .option {
-  padding: 6px 24px;
+  padding: 5px 20px;
   border-radius: 999px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   transition: background 0.2s, color 0.2s;
   color: var(--color-text-muted);

@@ -3,19 +3,19 @@
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .amount {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
   font-variant-numeric: tabular-nums;
   transition: color 0.15s;
 }
 
 .currency {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--color-text-muted);
 }
