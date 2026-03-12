@@ -25,3 +25,8 @@ export function readSettings() {
 export function writeSettings(settings) {
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings))
 }
+
+export function clearAllData() {
+  localStorage.removeItem(TRANSACTIONS_KEY)
+  localStorage.removeItem(SETTINGS_KEY)
+}
