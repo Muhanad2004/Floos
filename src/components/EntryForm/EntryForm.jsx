@@ -1,5 +1,6 @@
 // src/components/EntryForm/EntryForm.jsx
 import { useState } from 'react'
+import BalanceSummary from '../BalanceSummary/BalanceSummary'
 import ModeToggle from '../ModeToggle/ModeToggle'
 import AmountDisplay from '../AmountDisplay/AmountDisplay'
 import CategorySelector from '../CategorySelector/CategorySelector'
@@ -35,6 +36,7 @@ export default function EntryForm({ onSubmit, initialValues, isEdit = false }) {
 
   return (
     <div className={styles.form}>
+      <BalanceSummary />
       <div className={styles.topSection}>
         <ModeToggle mode={mode} onChange={handleModeChange} />
         <div className={styles.amountWrap}>

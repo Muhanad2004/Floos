@@ -2,7 +2,7 @@
 import styles from './TabBar.module.css'
 
 const TABS = [
-  { id: 'dashboard', label: 'Home', icon: '⊞' },
+  { id: 'dashboard', label: 'Stats', icon: '⊞' },
   { id: 'entry', label: 'Add', icon: '+', prominent: true },
   { id: 'history', label: 'History', icon: '≡' },
   { id: 'settings', label: 'Settings', icon: '⚙' },
