@@ -3,7 +3,7 @@
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding: 0;
+  padding: 0 0 0 16px;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-x;
@@ -12,10 +12,10 @@
 
 .chip {
   flex-shrink: 0;
-  padding: 6px 14px;
+  padding: 8px 18px;
   border-radius: 999px;
   border: 1.5px solid var(--color-border);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 500;
   color: var(--color-text-muted);
   background: transparent;
