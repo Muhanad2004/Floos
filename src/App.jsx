@@ -23,7 +23,7 @@ export default function App() {
       const isDark =
         settings.theme === 'dark' ||
         (settings.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
-      const color = isDark ? '#0f172a' : '#ffffff'
+      const color = isDark ? '#1e1e1e' : '#ffffff'
       document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute('content', color))
     }
 
