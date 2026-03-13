@@ -47,7 +47,7 @@ html[data-theme="dark"] {
 
 html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: var(--color-bg);
+  background: var(--color-tab-bar-bg);
   color: var(--color-text);
   -webkit-text-size-adjust: 100%;
   -webkit-touch-callout: none;
