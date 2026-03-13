@@ -39,6 +39,17 @@
 
 .spacer { flex: 1; }
 
+.exportBtn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
 .eraseBtn {
   width: 100%;
   padding: 16px;

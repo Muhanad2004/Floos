@@ -7,8 +7,19 @@ import styles from './Settings.module.css'
 const THEMES = ['light', 'dark', 'system']
 
 export default function Settings() {
-  const { settings, updateSettings, eraseAllData } = useApp()
+  const { settings, updateSettings, eraseAllData, transactions } = useApp()
   const [showConfirm, setShowConfirm] = useState(false)
+
+  function handleExport() {
+    const data = JSON.stringify(transactions, null, 2)
+    const blob = new Blob([data], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `floos-export-${new Date().toISOString().slice(0, 10)}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
 
   async function handleErase() {
     eraseAllData()
@@ -48,6 +59,10 @@ export default function Settings() {
       </section>
 
       <div className={styles.spacer} />
+
+      <button className={styles.exportBtn} onClick={handleExport}>
+        Export Data
+      </button>
 
       <button className={styles.eraseBtn} onClick={() => setShowConfirm(true)}>
         Erase All Data
