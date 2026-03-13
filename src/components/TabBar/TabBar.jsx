@@ -3,7 +3,7 @@ import { BarChart2, CirclePlus, History, Settings } from 'lucide-react'
 import styles from './TabBar.module.css'
 
 const TABS = [
-  { id: 'dashboard', label: 'Stats', Icon: BarChart2 },
+  { id: 'stats', label: 'Stats', Icon: BarChart2 },
   { id: 'entry', label: 'Add', Icon: CirclePlus, prominent: true },
   { id: 'history', label: 'History', Icon: History },
   { id: 'settings', label: 'Settings', Icon: Settings },

@@ -2,13 +2,13 @@
 import { useState, useEffect } from 'react'
 import { useApp } from './context/AppContext'
 import TabBar from './components/TabBar/TabBar'
-import Dashboard from './screens/Dashboard/Dashboard'
+import Stats from './screens/Stats/Stats'
 import Entry from './screens/Entry/Entry'
 import History from './screens/History/History'
 import Settings from './screens/Settings/Settings'
 import styles from './App.module.css'
 
-const SCREENS = { dashboard: Dashboard, entry: Entry, history: History, settings: Settings }
+const SCREENS = { stats: Stats, entry: Entry, history: History, settings: Settings }
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('entry')
