@@ -1,5 +1,5 @@
 /* src/screens/History/History.module.css */
-.screen { display: flex; flex-direction: column; height: 100%; }
+.screen { display: flex; flex-direction: column; flex: 1; min-height: 0; }
 
 .searchWrap {
   padding: 12px 16px;
