@@ -20,6 +20,11 @@ export default function Settings() {
       const regs = await navigator.serviceWorker.getRegistrations()
       await Promise.all(regs.map(r => r.unregister()))
     }
+    const dbs = await window.indexedDB?.databases?.()
+    if (dbs) await Promise.all(dbs.map(db => window.indexedDB.deleteDatabase(db.name)))
+    document.cookie.split(';').forEach(c => {
+      document.cookie = c.trim().split('=')[0] + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/'
+    })
     window.location.reload()
   }
 
@@ -51,7 +56,7 @@ export default function Settings() {
       <BottomSheet isOpen={showConfirm} onClose={() => setShowConfirm(false)}>
         <div className={styles.confirmSheet}>
           <p className={styles.confirmMsg}>
-            This will permanently delete all your transactions and reset settings.
+            This will permanently delete all your transactions, reset settings, and clear all cached data.
           </p>
           <button className={`${styles.sheetBtn} ${styles.destructive}`} onClick={handleErase}>
             Erase Everything

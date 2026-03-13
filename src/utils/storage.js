@@ -35,6 +35,6 @@ export function writeSettings(settings) {
 }
 
 export function clearAllData() {
-  localStorage.removeItem(TRANSACTIONS_KEY)
-  localStorage.removeItem(SETTINGS_KEY)
+  localStorage.clear()
+  sessionStorage.clear()
 }
