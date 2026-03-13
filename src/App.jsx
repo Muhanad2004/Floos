@@ -18,6 +18,22 @@ export default function App() {
     const root = document.documentElement
     if (settings.theme === 'system') root.removeAttribute('data-theme')
     else root.setAttribute('data-theme', settings.theme)
+
+    const updateThemeColor = () => {
+      const isDark =
+        settings.theme === 'dark' ||
+        (settings.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      const color = isDark ? '#0f172a' : '#ffffff'
+      document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute('content', color))
+    }
+
+    updateThemeColor()
+
+    if (settings.theme === 'system') {
+      const mq = window.matchMedia('(prefers-color-scheme: dark)')
+      mq.addEventListener('change', updateThemeColor)
+      return () => mq.removeEventListener('change', updateThemeColor)
+    }
   }, [settings.theme])
 
   const Screen = SCREENS[activeTab]
