@@ -2,10 +2,18 @@
 .form {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.topSection {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
   gap: 10px;
   padding: 10px 0 0;
-  height: 100%;
-  overflow: hidden;
 }
 
 .amountWrap { padding: 0 16px; }
@@ -25,6 +33,5 @@
 .notesInput:focus { border-color: var(--color-green); }
 
 .numPadWrap {
-  margin-top: auto;
   flex-shrink: 0;
 }

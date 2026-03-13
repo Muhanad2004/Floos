@@ -35,22 +35,24 @@ export default function EntryForm({ onSubmit, initialValues, isEdit = false }) {
 
   return (
     <div className={styles.form}>
-      <ModeToggle mode={mode} onChange={handleModeChange} />
-      <div className={styles.amountWrap}>
-        <AmountDisplay queue={queue} />
-      </div>
-      <CategorySelector mode={mode} selected={category} onSelect={setCategory} />
-      <div className={styles.notesWrap}>
-        <input
-          className={styles.notesInput}
-          type="text"
-          placeholder="Add a note..."
-          maxLength={100}
-          value={note}
-          onChange={e => setNote(e.target.value)}
-          onFocus={() => setNotesFocused(true)}
-          onBlur={() => setNotesFocused(false)}
-        />
+      <div className={styles.topSection}>
+        <ModeToggle mode={mode} onChange={handleModeChange} />
+        <div className={styles.amountWrap}>
+          <AmountDisplay queue={queue} />
+        </div>
+        <CategorySelector mode={mode} selected={category} onSelect={setCategory} />
+        <div className={styles.notesWrap}>
+          <input
+            className={styles.notesInput}
+            type="text"
+            placeholder="Add a note..."
+            maxLength={100}
+            value={note}
+            onChange={e => setNote(e.target.value)}
+            onFocus={() => setNotesFocused(true)}
+            onBlur={() => setNotesFocused(false)}
+          />
+        </div>
       </div>
       {!notesFocused && (
         <div className={styles.numPadWrap}>
