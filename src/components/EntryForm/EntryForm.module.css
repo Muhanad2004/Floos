@@ -7,30 +7,75 @@
   overflow: hidden;
 }
 
-.topSection {
+/* Amount + notes — grows to fill available space */
+.middle {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  gap: 10px;
-  padding: 10px 0 0;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px 0;
 }
 
-.amountWrap { padding: 0 16px; }
-.notesWrap { padding: 0 16px; }
+.amountWrap {
+  padding: 0 16px;
+}
+
+.notesWrap {
+  padding: 0 16px;
+}
 
 .notesInput {
   width: 100%;
-  padding: 8px 14px;
-  border-radius: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
   border: 1.5px solid var(--color-border);
   background: var(--color-surface);
-  font-size: 16px;
+  font-size: 15px;
   outline: none;
   transition: border-color 0.15s;
+  color: var(--color-text);
 }
 
-.notesInput:focus { border-color: var(--color-green); }
+.notesInput:focus {
+  border-color: var(--color-green);
+}
+
+/* Category chips + mode toggle in one row */
+.categoryRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 10px;
+}
+
+.categoryScroll {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.modeBtn {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.modeBtn.income {
+  background: var(--color-green);
+  color: white;
+}
+
+.modeBtn.expense {
+  background: var(--color-red);
+  color: white;
+}
 
 .numPadWrap {
   flex-shrink: 0;
