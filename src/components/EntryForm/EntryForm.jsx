@@ -8,7 +8,7 @@ import { addDigit, removeDigit, queueToAmount, amountToQueue, isQueueZero } from
 import styles from './EntryForm.module.css'
 
 export default function EntryForm({ onSubmit, initialValues, isEdit = false }) {
-  const [mode, setMode] = useState(initialValues?.type ?? 'income')
+  const [mode, setMode] = useState(initialValues?.type ?? 'expense')
   const [queue, setQueue] = useState(
     initialValues?.amount ? amountToQueue(initialValues.amount) : []
   )
