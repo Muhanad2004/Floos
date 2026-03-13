@@ -1,5 +1,6 @@
 // src/screens/History/History.jsx
 import { useState } from 'react'
+import { X } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { groupByDay } from '../../utils/dateUtils'
 import TransactionGroup from './TransactionGroup'
@@ -92,7 +93,7 @@ export default function History() {
       <BottomSheet isOpen={showEdit} onClose={() => setShowEdit(false)}>
         <div className={styles.editHeader}>
           <span className={styles.editTitle}>Edit Transaction</span>
-          <button className={styles.closeBtn} onClick={() => setShowEdit(false)}>×</button>
+          <button className={styles.closeBtn} onClick={() => setShowEdit(false)}><X size={18} strokeWidth={2} /></button>
         </div>
         {selectedTx && (
           <EntryForm initialValues={selectedTx} isEdit onSubmit={handleEditSubmit} />

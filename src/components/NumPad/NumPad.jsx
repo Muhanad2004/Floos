@@ -1,4 +1,5 @@
 // src/components/NumPad/NumPad.jsx
+import { Delete, Check } from 'lucide-react'
 import styles from './NumPad.module.css'
 
 const LAYOUT = [
@@ -21,7 +22,7 @@ export default function NumPad({ onDigit, onBackspace, onConfirm, confirmDisable
     <div className={styles.grid}>
       {flatKeys.map((key, i) => {
         const isConfirm = key === '✓'
-        const displayKey = isConfirm ? confirmLabel : key
+        const isBackspace = key === '⌫'
         return (
           <button
             key={i}
@@ -34,7 +35,9 @@ export default function NumPad({ onDigit, onBackspace, onConfirm, confirmDisable
             onClick={() => handleKey(isConfirm ? 'CONFIRM' : key)}
             disabled={isConfirm && confirmDisabled}
           >
-            {displayKey}
+            {isBackspace && <Delete size={20} strokeWidth={1.8} />}
+            {isConfirm && (confirmLabel === '✓' ? <Check size={20} strokeWidth={2.2} /> : confirmLabel)}
+            {!isBackspace && !isConfirm && key}
           </button>
         )
       })}
