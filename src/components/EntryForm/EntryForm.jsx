@@ -62,6 +62,7 @@ export default function EntryForm({ onSubmit, initialValues, isEdit = false }) {
             <div className={styles.categoryScroll}>
               <CategorySelector mode={mode} selected={category} onSelect={setCategory} />
             </div>
+            <div className={styles.modeDivider} />
             <button
               className={`${styles.modeBtn} ${styles[mode]}`}
               onClick={handleModeToggle}

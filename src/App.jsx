@@ -11,7 +11,7 @@ import styles from './App.module.css'
 const SCREENS = { dashboard: Dashboard, entry: Entry, history: History, settings: Settings }
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('dashboard')
+  const [activeTab, setActiveTab] = useState('entry')
   const { settings } = useApp()
 
   useEffect(() => {
