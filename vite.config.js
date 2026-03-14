@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icon.png'],
+      includeAssets: ['icon.png', 'apple-touch-icon.png'],
       manifest: {
         name: 'Floos',
         short_name: 'Floos',
