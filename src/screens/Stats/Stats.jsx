@@ -4,7 +4,7 @@ import { useApp } from '../../context/AppContext'
 import styles from './Stats.module.css'
 
 const EXPENSE_COLORS = {
-  Groceries:      '#10B981',
+  Groceries:      '#3ddc68',
   Dining:         '#3B82F6',
   Snacks:         '#F59E0B',
   Bills:          '#EF4444',
@@ -18,7 +18,7 @@ const EXPENSE_COLORS = {
 }
 
 const INCOME_COLORS = {
-  Salary:     '#10B981',
+  Salary:     '#3ddc68',
   Gift:       '#3B82F6',
   Investment: '#F59E0B',
   Savings:    '#8B5CF6',

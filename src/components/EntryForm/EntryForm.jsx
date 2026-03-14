@@ -1,9 +1,11 @@
 // src/components/EntryForm/EntryForm.jsx
 import { useState } from 'react'
+import { ChevronDown } from 'lucide-react'
 import BalanceSummary from '../BalanceSummary/BalanceSummary'
 import AmountDisplay from '../AmountDisplay/AmountDisplay'
-import CategorySelector from '../CategorySelector/CategorySelector'
+import BottomSheet from '../BottomSheet/BottomSheet'
 import NumPad from '../NumPad/NumPad'
+import { getCategoriesForType } from '../../constants/categories'
 import { addDigit, removeDigit, queueToAmount, amountToQueue, isQueueZero } from '../../utils/amountUtils'
 import styles from './EntryForm.module.css'
 
@@ -15,6 +17,7 @@ export default function EntryForm({ onSubmit, initialValues, isEdit = false }) {
   const [category, setCategory] = useState(initialValues?.category ?? null)
   const [note, setNote] = useState(initialValues?.note ?? '')
   const [notesFocused, setNotesFocused] = useState(false)
+  const [sheetOpen, setSheetOpen] = useState(false)
 
   function handleModeToggle() {
     setMode(m => (m === 'income' ? 'expense' : 'income'))
@@ -59,10 +62,13 @@ export default function EntryForm({ onSubmit, initialValues, isEdit = false }) {
       {!notesFocused && (
         <>
           <div className={styles.categoryRow}>
-            <div className={styles.categoryScroll}>
-              <CategorySelector mode={mode} selected={category} onSelect={setCategory} />
-            </div>
-            <div className={styles.modeDivider} />
+            <button
+              className={`${styles.categoryPickerBtn} ${category ? styles[mode] : ''}`}
+              onClick={() => setSheetOpen(true)}
+            >
+              <span>{category ?? 'Category'}</span>
+              <ChevronDown size={15} strokeWidth={2} />
+            </button>
             <button
               className={`${styles.modeBtn} ${styles[mode]}`}
               onClick={handleModeToggle}
@@ -70,6 +76,23 @@ export default function EntryForm({ onSubmit, initialValues, isEdit = false }) {
               {mode === 'income' ? 'Income' : 'Expense'}
             </button>
           </div>
+
+          <BottomSheet isOpen={sheetOpen} onClose={() => setSheetOpen(false)}>
+            <div className={styles.sheetContent}>
+              <p className={styles.sheetTitle}>Category</p>
+              <div className={styles.sheetGrid}>
+                {getCategoriesForType(mode).map(cat => (
+                  <button
+                    key={cat}
+                    className={`${styles.sheetChip} ${styles[mode]} ${category === cat ? styles.selected : ''}`}
+                    onClick={() => { setCategory(cat); setSheetOpen(false) }}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </BottomSheet>
 
           <div className={styles.numPadWrap}>
             <NumPad

@@ -1,7 +1,7 @@
 // src/utils/exportPdf.js
 import { jsPDF } from 'jspdf'
 
-const GREEN  = [16, 185, 129]   // #10B981
+const GREEN  = [61, 220, 104]   // #3ddc68
 const RED    = [239, 68, 68]    // #EF4444
 const DARK   = [30, 30, 30]     // #1e1e1e
 const MUTED  = [107, 114, 128]  // #6b7280
