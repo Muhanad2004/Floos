@@ -1,6 +1,6 @@
 // src/screens/History/History.jsx
 import { useState, useMemo } from 'react'
-import { X, Share2 } from 'lucide-react'
+import { X, FileDown } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { groupByDay } from '../../utils/dateUtils'
 import { exportToPdf } from '../../utils/exportPdf'
@@ -83,7 +83,7 @@ export default function History() {
           disabled={transactions.length === 0}
           aria-label="Export PDF"
         >
-          <Share2 size={18} strokeWidth={2} />
+          <FileDown size={18} strokeWidth={2} />
         </button>
       </div>
 

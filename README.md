@@ -1,16 +1,38 @@
-# React + Vite
+# Floos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal finance tracker built as a Progressive Web App (PWA). Designed for fast, offline-first expense and income logging with a clean mobile-first interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Log transactions** — income and expenses with categories, amounts, and optional notes
+- **History** — searchable transaction list grouped by day, with edit and delete support
+- **Stats** — pie charts showing spending and income breakdown by category, with a net summary
+- **PDF export** — generate a formatted transaction report filtered by All / Income / Expenses
+- **Themes** — Light, Dark, and System modes
+- **Offline** — works fully without an internet connection once installed
 
-## React Compiler
+## Installation (iOS)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Open Safari and go to the app URL
+2. Tap the **Share** button (box with arrow) in the bottom toolbar
+3. Scroll down and tap **Add to Home Screen**
+4. Tap **Add** in the top right
+5. The app will appear on your home screen and open as a standalone app
 
-## Expanding the ESLint configuration
+## Installation (Android)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Open Chrome and go to the app URL
+2. Tap the **three-dot menu** in the top right
+3. Tap **Add to Home Screen** or **Install App**
+4. Tap **Add** to confirm
+
+## Usage
+
+- **+** tab — enter a new transaction using the numpad
+- **History** tab — view, search, edit, or delete past transactions; tap the export icon to generate a PDF report
+- **Stats** tab — view category breakdowns for all recorded transactions
+- **Settings** tab — change theme, erase transactions, or reset the app
+
+## Currency
+
+All amounts are in **OMR** (Omani Rial) with 3 decimal places.
