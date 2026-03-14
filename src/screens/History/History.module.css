@@ -2,6 +2,9 @@
 .screen { display: flex; flex-direction: column; flex: 1; min-height: 0; }
 
 .searchWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 12px 16px;
   background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
@@ -9,7 +12,7 @@
 }
 
 .searchInput {
-  width: 100%;
+  flex: 1;
   padding: 10px 14px;
   border-radius: 10px;
   border: 1.5px solid var(--color-border);
@@ -19,6 +22,20 @@
 }
 
 .searchInput:focus { border-color: var(--color-green); }
+
+.exportBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.exportBtn:disabled { opacity: 0.35; }
 
 .list { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 
@@ -72,6 +89,65 @@
 
 .positive { color: var(--color-green); }
 .negative { color: var(--color-red); }
+
+/* ── Export sheet ────────────────────────────────────────────── */
+
+.exportSheet {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 16px 8px;
+  gap: 10px;
+}
+
+.exportTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 2px;
+}
+
+.filterToggle {
+  display: flex;
+  background: var(--color-surface);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.filterBtn {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: all 0.15s;
+}
+
+.filterBtn.filterActive {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.exportCount {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.exportConfirmBtn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--color-green);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.exportConfirmBtn:disabled { opacity: 0.4; }
 
 .sheetActions { display: flex; flex-direction: column; padding: 8px 16px; gap: 4px; }
 .sheetMessage { text-align: center; padding: 8px 0 12px; color: var(--color-text-muted); font-size: 0.9rem; }

@@ -3,13 +3,6 @@ import { useState, useMemo } from 'react'
 import { useApp } from '../../context/AppContext'
 import styles from './Stats.module.css'
 
-const PERIODS = [
-  { key: 'this-month', label: 'This Month' },
-  { key: 'last-month', label: 'Last Month' },
-  { key: 'this-year', label: 'This Year' },
-  { key: 'all', label: 'All Time' },
-]
-
 const EXPENSE_COLORS = {
   Groceries:      '#10B981',
   Dining:         '#3B82F6',
@@ -30,23 +23,6 @@ const INCOME_COLORS = {
   Investment: '#F59E0B',
   Savings:    '#8B5CF6',
   Other:      '#9ca3af',
-}
-
-function filterByPeriod(transactions, period) {
-  const now = new Date()
-  return transactions.filter(tx => {
-    const d = new Date(tx.createdAt)
-    if (period === 'this-month')
-      return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth()
-    if (period === 'last-month') {
-      const y = now.getMonth() === 0 ? now.getFullYear() - 1 : now.getFullYear()
-      const m = now.getMonth() === 0 ? 11 : now.getMonth() - 1
-      return d.getFullYear() === y && d.getMonth() === m
-    }
-    if (period === 'this-year')
-      return d.getFullYear() === now.getFullYear()
-    return true
-  })
 }
 
 function aggregateByCategory(transactions, type, colorMap) {
@@ -105,17 +81,11 @@ function PieChart({ slices }) {
     const sweep = s.pct * 360
     const start = angle
     angle += sweep
-    const isActive = active === i
-    return { ...s, start, end: angle, isActive }
+    return { ...s, start, end: angle, isActive: active === i }
   })
 
   return (
-    <svg
-      width={SIZE}
-      height={SIZE}
-      viewBox={`0 0 ${SIZE} ${SIZE}`}
-      className={styles.pie}
-    >
+    <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} className={styles.pie}>
       {paths.map((p, i) => (
         <path
           key={p.label}
@@ -167,34 +137,20 @@ function ChartSection({ title, data, emptyMsg, negative }) {
 
 export default function Stats() {
   const { transactions } = useApp()
-  const [period, setPeriod] = useState('this-month')
 
-  const filtered = useMemo(() => filterByPeriod(transactions, period), [transactions, period])
-  const expenses = useMemo(() => aggregateByCategory(filtered, 'expense', EXPENSE_COLORS), [filtered])
-  const income = useMemo(() => aggregateByCategory(filtered, 'income', INCOME_COLORS), [filtered])
+  const expenses = useMemo(() => aggregateByCategory(transactions, 'expense', EXPENSE_COLORS), [transactions])
+  const income = useMemo(() => aggregateByCategory(transactions, 'income', INCOME_COLORS), [transactions])
 
   const net = income.total - expenses.total
   const topExpense = expenses.slices[0] ?? null
 
   return (
     <div className={styles.screen}>
-      <div className={styles.periodBar}>
-        {PERIODS.map(p => (
-          <button
-            key={p.key}
-            className={`${styles.periodBtn} ${period === p.key ? styles.active : ''}`}
-            onClick={() => setPeriod(p.key)}
-          >
-            {p.label}
-          </button>
-        ))}
-      </div>
-
       <div className={styles.scroll}>
         <ChartSection
           title="Expenses"
           data={expenses}
-          emptyMsg="No expenses this period"
+          emptyMsg="No expenses recorded"
           negative
         />
 
@@ -210,7 +166,7 @@ export default function Stats() {
         <ChartSection
           title="Income"
           data={income}
-          emptyMsg="No income this period"
+          emptyMsg="No income recorded"
         />
 
         <div className={styles.summary}>

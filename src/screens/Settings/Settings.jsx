@@ -7,7 +7,7 @@ import styles from './Settings.module.css'
 const THEMES = ['light', 'dark', 'system']
 
 export default function Settings() {
-  const { settings, updateSettings, eraseAllData, transactions } = useApp()
+  const { settings, updateSettings, eraseAllData } = useApp()
   const [showConfirm, setShowConfirm] = useState(false)
 
   async function handleRefresh() {
@@ -16,17 +16,6 @@ export default function Settings() {
       if (reg?.waiting) reg.waiting.postMessage({ type: 'SKIP_WAITING' })
     }
     window.location.reload()
-  }
-
-  function handleExport() {
-    const data = JSON.stringify(transactions, null, 2)
-    const blob = new Blob([data], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `floos-export-${new Date().toISOString().slice(0, 10)}.json`
-    a.click()
-    URL.revokeObjectURL(url)
   }
 
   async function handleErase() {
@@ -70,10 +59,6 @@ export default function Settings() {
 
       <button className={styles.refreshBtn} onClick={handleRefresh}>
         Refresh App
-      </button>
-
-      <button className={styles.exportBtn} onClick={handleExport}>
-        Export Data
       </button>
 
       <button className={styles.eraseBtn} onClick={() => setShowConfirm(true)}>

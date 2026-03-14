@@ -7,37 +7,6 @@
   min-height: 0;
 }
 
-/* ── Period selector ─────────────────────────────────────────── */
-
-.periodBar {
-  display: flex;
-  gap: 4px;
-  padding: 10px 12px;
-  background: var(--color-bg);
-  border-bottom: 1px solid var(--color-border);
-  flex-shrink: 0;
-}
-
-.periodBtn {
-  flex: 1;
-  padding: 8px 4px;
-  border-radius: 8px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  background: transparent;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-
-.periodBtn.active {
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-weight: 700;
-}
-
-/* ── Scroll area ─────────────────────────────────────────────── */
-
 .scroll {
   flex: 1;
   overflow-y: auto;
