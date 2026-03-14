@@ -1,78 +1,124 @@
 /* src/screens/Settings/Settings.module.css */
-.screen { display: flex; flex-direction: column; flex: 1; min-height: 0; padding: 24px 16px; }
-.title { font-size: 1.5rem; font-weight: 800; margin-bottom: 32px; }
-.section { margin-bottom: 24px; }
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 24px 16px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+/* ── Section label ───────────────────────────────────────────── */
 
 .sectionLabel {
-  display: block;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-text-muted);
   font-weight: 600;
-  margin-bottom: 10px;
+  margin: 0 4px 6px;
 }
+
+/* ── Group (card of rows) ────────────────────────────────────── */
+
+.group {
+  background: var(--color-surface);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 14px;
+  text-align: left;
+}
+
+.row:active { background: var(--color-border); }
+
+.rowDivider {
+  height: 1px;
+  background: var(--color-border);
+  margin-left: 54px;
+}
+
+.rowLabel {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.danger .rowLabel { color: var(--color-red); }
+
+.chevron {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* ── Icon box ────────────────────────────────────────────────── */
+
+.iconBox {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.purple { background: #8B5CF6; }
+.blue   { background: #3B82F6; }
+.orange { background: #F97316; }
+.red    { background: var(--color-red); }
+
+/* ── Theme toggle (inline in row) ───────────────────────────── */
 
 .themeToggle {
   display: flex;
-  background: var(--color-surface);
-  border-radius: 10px;
-  padding: 3px;
+  background: var(--color-bg);
+  border-radius: 8px;
+  padding: 2px;
   gap: 2px;
 }
 
 .themeOption {
-  flex: 1;
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 28px;
+  border-radius: 6px;
   color: var(--color-text-muted);
   transition: all 0.15s;
 }
 
 .themeOption.active {
-  background: var(--color-bg);
-  color: var(--color-text);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.spacer { flex: 1; }
-
-.refreshBtn {
-  width: 100%;
-  padding: 16px;
-  border-radius: 12px;
   background: var(--color-surface);
   color: var(--color-text);
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
-.exportBtn {
-  width: 100%;
-  padding: 16px;
-  border-radius: 12px;
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
+/* ── Confirm sheet ───────────────────────────────────────────── */
 
-.eraseBtn {
-  width: 100%;
-  padding: 16px;
-  border-radius: 12px;
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--color-red);
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
+.confirmSheet {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-
-.confirmSheet { padding: 8px 16px; display: flex; flex-direction: column; gap: 8px; }
 
 .confirmMsg {
   text-align: center;

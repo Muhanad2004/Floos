@@ -38,6 +38,11 @@ export function AppProvider({ children }) {
     writeSettings(next)
   }, [settings])
 
+  const eraseTransactions = useCallback(() => {
+    writeTransactions([])
+    setTransactions([])
+  }, [])
+
   const eraseAllData = useCallback(() => {
     clearAllData()
     setTransactions([])
@@ -52,6 +57,7 @@ export function AppProvider({ children }) {
       updateTransaction,
       deleteTransaction,
       updateSettings,
+      eraseTransactions,
       eraseAllData,
     }}>
       {children}
