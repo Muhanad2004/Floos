@@ -36,5 +36,4 @@ export function writeSettings(settings) {
 
 export function clearAllData() {
   localStorage.clear()
-  sessionStorage.clear()
 }

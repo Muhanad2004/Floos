@@ -37,7 +37,7 @@
 
 .exportBtn:disabled { opacity: 0.35; }
 
-.list { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.list { flex: 1; overflow-y: auto; }
 
 .emptyState {
   text-align: center;

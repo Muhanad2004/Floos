@@ -7,7 +7,6 @@
   min-height: 0;
   padding: 24px 16px;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .title {

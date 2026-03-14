@@ -21,11 +21,13 @@ export default function History() {
   const [showExport, setShowExport]   = useState(false)
   const [exportFilter, setExportFilter] = useState('All')
 
-  const filtered = search.trim()
-    ? transactions.filter(tx => tx.note && tx.note.toLowerCase().includes(search.toLowerCase()))
-    : transactions
+  const filtered = useMemo(() =>
+    search.trim()
+      ? transactions.filter(tx => tx.note && tx.note.toLowerCase().includes(search.toLowerCase()))
+      : transactions
+  , [transactions, search])
 
-  const groups = groupByDay(filtered)
+  const groups = useMemo(() => groupByDay(filtered), [filtered])
   const isEmpty = transactions.length === 0
   const noResults = !isEmpty && Object.keys(groups).length === 0
 

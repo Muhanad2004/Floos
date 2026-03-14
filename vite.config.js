@@ -14,7 +14,7 @@ export default defineConfig({
         name: 'Floos',
         short_name: 'Floos',
         description: 'Personal finance tracker for OMR',
-        theme_color: '#10B981',
+        theme_color: '#3ddc68',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',

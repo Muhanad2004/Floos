@@ -26,6 +26,8 @@ function aggregateByCategory(transactions, type) {
   return Object.entries(map).sort((a, b) => b[1] - a[1])
 }
 
+// Intentionally separate from dateUtils.groupByDay — this version uses formatted en-GB strings
+// as keys ("01 Jan 2024") since they serve as the display labels in PDF section headers.
 function groupByDay(transactions) {
   const map = {}
   for (const tx of transactions) {

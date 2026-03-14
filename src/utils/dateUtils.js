@@ -1,18 +1,21 @@
 // src/utils/dateUtils.js
 
-function toLocalDateString(isoString) {
-  const d = new Date(isoString)
-  const year = d.getFullYear()
-  const month = String(d.getMonth() + 1).padStart(2, '0')
-  const day = String(d.getDate()).padStart(2, '0')
+function toLocalDateString(date) {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
   return `${year}-${month}-${day}`
 }
 
+function isoToLocalDateString(isoString) {
+  return toLocalDateString(new Date(isoString))
+}
+
 export function formatDateHeader(dateStr, now = new Date()) {
-  const todayStr = toLocalDateString(now.toISOString())
+  const todayStr = toLocalDateString(now)
   const yesterdayDate = new Date(now)
   yesterdayDate.setDate(yesterdayDate.getDate() - 1)
-  const yesterdayStr = toLocalDateString(yesterdayDate.toISOString())
+  const yesterdayStr = toLocalDateString(yesterdayDate)
 
   if (dateStr === todayStr) return 'Today'
   if (dateStr === yesterdayStr) return 'Yesterday'
@@ -29,7 +32,7 @@ export function formatTime12h(date) {
 export function groupByDay(transactions) {
   const map = {}
   for (const tx of transactions) {
-    const key = toLocalDateString(tx.createdAt)
+    const key = isoToLocalDateString(tx.createdAt)
     if (!map[key]) map[key] = []
     map[key].push(tx)
   }

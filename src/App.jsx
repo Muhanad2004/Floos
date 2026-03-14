@@ -34,6 +34,7 @@ export default function App() {
       mq.addEventListener('change', updateThemeColor)
       return () => mq.removeEventListener('change', updateThemeColor)
     }
+    // No cleanup returned for 'light'/'dark' — no listener was registered, so none needs removing
   }, [settings.theme])
 
   const Screen = SCREENS[activeTab]

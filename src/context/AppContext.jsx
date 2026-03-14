@@ -33,10 +33,12 @@ export function AppProvider({ children }) {
   }, [])
 
   const updateSettings = useCallback((updates) => {
-    const next = { ...settings, ...updates }
-    setSettings(next)
-    writeSettings(next)
-  }, [settings])
+    setSettings(prev => {
+      const next = { ...prev, ...updates }
+      writeSettings(next)
+      return next
+    })
+  }, [])
 
   const eraseTransactions = useCallback(() => {
     writeTransactions([])

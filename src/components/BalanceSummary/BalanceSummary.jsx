@@ -1,4 +1,5 @@
 // src/components/BalanceSummary/BalanceSummary.jsx
+import { useMemo } from 'react'
 import { useApp } from '../../context/AppContext'
 import { getBalance, getMonthTotals } from '../../utils/dateUtils'
 import styles from './BalanceSummary.module.css'
@@ -11,8 +12,8 @@ function amountColorClass(amount, styles) {
 
 export default function BalanceSummary() {
   const { transactions } = useApp()
-  const balance = getBalance(transactions)
-  const { income, expense } = getMonthTotals(transactions)
+  const balance = useMemo(() => getBalance(transactions), [transactions])
+  const { income, expense } = useMemo(() => getMonthTotals(transactions), [transactions])
 
   return (
     <div className={styles.wrapper}>

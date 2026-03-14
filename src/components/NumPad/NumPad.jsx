@@ -25,7 +25,7 @@ export default function NumPad({ onDigit, onBackspace, onConfirm, confirmDisable
         const isBackspace = key === '⌫'
         return (
           <button
-            key={i}
+            key={key}
             className={`
               ${styles.key}
               ${isConfirm ? styles.confirm : ''}

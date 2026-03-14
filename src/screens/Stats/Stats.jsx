@@ -1,29 +1,8 @@
 // src/screens/Stats/Stats.jsx
 import { useState, useMemo } from 'react'
 import { useApp } from '../../context/AppContext'
+import { EXPENSE_COLORS, INCOME_COLORS } from '../../constants/categories'
 import styles from './Stats.module.css'
-
-const EXPENSE_COLORS = {
-  Groceries:      '#3ddc68',
-  Dining:         '#3B82F6',
-  Snacks:         '#F59E0B',
-  Bills:          '#EF4444',
-  Laundromat:     '#8B5CF6',
-  Phone:          '#06B6D4',
-  Shopping:       '#EC4899',
-  Health:         '#84CC16',
-  Subscriptions:  '#F97316',
-  'Personal Care':'#6366F1',
-  Other:          '#9ca3af',
-}
-
-const INCOME_COLORS = {
-  Salary:     '#3ddc68',
-  Gift:       '#3B82F6',
-  Investment: '#F59E0B',
-  Savings:    '#8B5CF6',
-  Other:      '#9ca3af',
-}
 
 function aggregateByCategory(transactions, type, colorMap) {
   const map = {}
@@ -92,7 +71,7 @@ function PieChart({ slices }) {
           d={arcPath(cx, cy, p.isActive ? R_ACTIVE : R, p.start, p.end)}
           fill={p.color}
           onClick={() => setActive(active === i ? null : i)}
-          style={{ cursor: 'pointer', transition: 'd 0.15s' }}
+          style={{ cursor: 'pointer' }}
         />
       ))}
     </svg>

@@ -24,6 +24,7 @@ export function amountToQueue(amount) {
   return trimmed.split('').map(Number)
 }
 
+// Returns true for an empty queue ([].every is vacuously true) — both "empty" and "all zeros" mean no amount entered
 export function isQueueZero(queue) {
   return queue.every(d => d === 0)
 }
