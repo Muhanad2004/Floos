@@ -1,6 +1,6 @@
 // src/constants/categories.js
 export const INCOME_CATEGORIES = ['Salary', 'Gift', 'Investment', 'Savings', 'Other']
-export const EXPENSE_CATEGORIES = ['Groceries', 'Dining', 'Snacks', 'Bills', 'Laundromat', 'Phone', 'Shopping', 'Health', 'Subscriptions', 'Personal Care', 'Other']
+export const EXPENSE_CATEGORIES = ['Groceries', 'Dining', 'Snacks', 'Bills', 'Fuel', 'Laundromat', 'Phone', 'Shopping', 'Health', 'Subscriptions', 'Personal Care', 'Other']
 
 export function getCategoriesForType(type) {
   return type === 'income' ? INCOME_CATEGORIES : EXPENSE_CATEGORIES
@@ -12,6 +12,7 @@ export const EXPENSE_COLORS = {
   Dining:         '#3B82F6',
   Snacks:         '#F59E0B',
   Bills:          '#EF4444',
+  Fuel:           '#EAB308',
   Laundromat:     '#8B5CF6',
   Phone:          '#06B6D4',
   Shopping:       '#EC4899',
